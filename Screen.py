@@ -12,14 +12,16 @@ class Screen(QWidget):
     ai_signal = pyqtSignal(str)
     clear_signal = pyqtSignal()
 
-    def __init__(self):
+    def __init__(self, dots_opacity):
         super().__init__()
         self.dots = []
         self.screen_width = 0
         self.screen_height = 0
 
         self.dots_color = QColor("#00FF00")
-        self.dots_color.setAlphaF(120)
+        self.dots_opacity = dots_opacity
+        self.dOF = self.dots_opacity / 255
+        self.dots_color.setAlphaF(self.dOF)
 
         self.ai_signal.connect(self.response_analysis)
         self.clear_signal.connect(self.clear_dots)
@@ -56,7 +58,7 @@ class Screen(QWidget):
 
             bg_hex = data.get('bgcolor', "#00FF00")
             self.dots_color = QColor(bg_hex)
-            self.dots_color.setAlpha(120)
+            self.dots_color.setAlpha(self.dots_opacity)
 
 
             answers = data.get('answers', [])

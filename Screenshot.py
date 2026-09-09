@@ -59,11 +59,5 @@ class Screenshot:
         return self.last_screenshot
 
 
-if __name__ == "__main__":
-    from AI import AI
 
-    gem = AI("ss", "Gemini")
-
-    sc = Screenshot("ss", "f4", "test", on_screenshot_taken=gem.received_last_photo)
-    sc.start(blocking=True)
 
