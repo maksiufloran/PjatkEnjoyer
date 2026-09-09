@@ -1,4 +1,3 @@
-import sys
 from PyQt6.QtWidgets import QApplication, QWidget
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPainter, QBrush, QColor
@@ -12,7 +11,7 @@ class Screen(QWidget):
     ai_signal = pyqtSignal(str)
     clear_signal = pyqtSignal()
 
-    def __init__(self, dots_opacity):
+    def __init__(self, dots_opacity, dot_radius):
         super().__init__()
         self.dots = []
         self.screen_width = 0
@@ -22,6 +21,8 @@ class Screen(QWidget):
         self.dots_opacity = dots_opacity
         self.dOF = self.dots_opacity / 255
         self.dots_color.setAlphaF(self.dOF)
+
+        self.dot_radius = dot_radius
 
         self.ai_signal.connect(self.response_analysis)
         self.clear_signal.connect(self.clear_dots)
@@ -97,13 +98,8 @@ class Screen(QWidget):
         painter.setBrush(QBrush(self.dots_color))
         painter.setPen(Qt.PenStyle.NoPen)
 
-        dot_radius = 5
+        dot_radius = self.dot_radius
 
         for x, y in self.dots:
             painter.drawEllipse(x - dot_radius, y - dot_radius, dot_radius * 2, dot_radius * 2)
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    screen = Screen()
-    screen.show()
-    sys.exit(app.exec())

@@ -32,6 +32,7 @@ if __name__ == '__main__':
         cfg = configparser.ConfigParser()
         cfg.read("config.conf", encoding="utf-8")
         dots_opacity = cfg.getint('Screen', 'dots_opacity')
+        dot_radius = cfg.getint('Screen', 'dot_radius')
         hot_key = cfg.get('HotKeys', 'hot_key')
         clear_key = cfg.get('HotKeys', 'clear_key')
         file_name = cfg.get('Screenshot', 'file_name')
@@ -40,11 +41,12 @@ if __name__ == '__main__':
     except Exception as e:
         logging.error(f"--- configparser ERROR --- \n\t{e}")
         dots_opacity = 122
+        dot_radius = 5
         hot_key = "shift"
         clear_key = "f4"
         file_name = "test"
 
-    sc = Screen(dots_opacity)
+    sc = Screen(dots_opacity, dot_radius)
     sc.show()
 
     def handle_ai_response(response):
