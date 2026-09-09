@@ -42,7 +42,7 @@ if __name__ == '__main__':
     gem = AI("gemini-3.6-flash", "ss", handle_ai_response)
     ss = Screenshot("ss",
                     "shift",
-                    "ctrl_l",
+                    "f4",
                     "test",
                     on_screenshot_taken=on_screenshot_taken,
                     on_clear_requested=manual_clear)

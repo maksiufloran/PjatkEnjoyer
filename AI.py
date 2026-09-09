@@ -65,7 +65,6 @@ class AI:
                 print(data.get('analysis', 'Brak analizy...'))
                 print("=" * 40 + "\n")
 
-                # Zapisujemy pytanie do pliku questions.json
                 self.save_question(data, image_name)
 
             except Exception as e:
